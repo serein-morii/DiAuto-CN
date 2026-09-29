@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="night_mode">
+        <item>自动（日出/日落）</item>
+        <item>浅色</item>
+        <item>深色</item>
+        <item>手动时间</item>
+        <item>光线传感器</item>
+        <item>屏幕亮度</item>
+        <item>车辆大灯信号 (ILL+)</item>
+        <item>位置（按区域）</item>
+    </string-array>
+
+    <string-array name="app_theme">
+        <item>自动（跟随系统）</item>
+        <item>浅色</item>
+        <item>深色</item>
+        <item>极致深色</item>
+        <item>自动（日出/日落）</item>
+        <item>手动时间</item>
+        <item>光线传感器</item>
+        <item>屏幕亮度</item>
+        <item>车辆大灯信号 (ILL+)</item>
+        <item>位置（按区域）</item>
+    </string-array>
+
+    <string-array name="screen_orientation">
+        <item>@string/orientation_system_default</item>
+        <item>@string/orientation_auto_sensor</item>
+        <item>@string/orientation_landscape</item>
+        <item>@string/orientation_landscape_reverse</item>
+        <item>@string/orientation_portrait</item>
+        <item>@string/orientation_portrait_reverse</item>
+    </string-array>
+</resources>

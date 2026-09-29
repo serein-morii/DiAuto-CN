@@ -6,7 +6,7 @@
     <color name="da_accent">#A6C8FF</color>
     <color name="da_text">#F1F5FC</color>
     <color name="da_muted">#A8B6CA</color>
-    <string name="da_brand">DiAuto</string>
+    <string name="da_brand">DiAuto CN</string>
     <string name="da_tagline">YOUR PHONE. YOUR DRIVE.</string>
     <string name="da_headline">A familiar drive.</string>
     <string name="da_description">Your maps, music and conversations.\nAndroid Auto, right here on your car display.</string>
@@ -35,7 +35,7 @@
     <string name="da_display_hint">Picture size, frame rate and audio settings.</string>
     <string name="da_permissions">Permissions</string>
     <string name="da_permissions_hint">Check Bluetooth, microphone and location access.</string>
-    <string name="da_about">About DiAuto</string>
+    <string name="da_about">About DiAuto CN</string>
     <string name="da_about_hint">Version, licenses and open-source credits.</string>
     <string name="da_saved_hint">Changes to video settings apply on your next connection.</string>
     <string name="da_settings_subtitle">Tune your display, sound and connection.</string>
