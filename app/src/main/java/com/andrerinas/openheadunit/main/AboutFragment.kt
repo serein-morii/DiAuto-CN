@@ -35,18 +35,17 @@ class AboutFragment : Fragment() {
         val contentText = view.findViewById<TextView>(R.id.about_content_text)
         
         val sb = StringBuilder()
-        sb.append("<b>Special thanks to Mike Reidis for the original idea and android auto protocol and code.</b><br/>")
+        sb.append("<b>${getString(R.string.about_thanks_mike)}</b><br/>")
         sb.append("<a href=\"https://github.com/mikereidis/headunit\">https://github.com/mikereidis/headunit</a><br/><br/>")
-        sb.append("<h3>DiAuto ${com.andrerinas.openheadunit.BuildConfig.VERSION_NAME}</h3>")
-        sb.append("<a href=\"https://github.com/shihabal3amri/DiAuto\">DiAuto source and releases</a><br/>")
-        sb.append("An independent Android Auto receiver for BYD DiLink. Based on ")
-        sb.append("<a href=\"https://github.com/andreknieriem/open-headunit\">Open Headunit</a>. ")
-        sb.append("Thanks to its authors and contributors. Not affiliated with Google or BYD.<br/><br/>")
+        sb.append("<h3>DiAuto CN ${com.andrerinas.openheadunit.BuildConfig.VERSION_NAME}</h3>")
+        sb.append("<a href=\"https://github.com/serein-morii/DiAuto-CN\">${getString(R.string.about_source_link)}</a><br/>")
+        sb.append("${getString(R.string.about_intro)} ")
+        sb.append("<a href=\"https://github.com/andreknieriem/open-headunit\">Open Headunit</a><br/><br/>")
 
         sb.append(parseMarkdownToHtml(readAsset("CHANGELOG.md")))
         sb.append("<br/><br/>")
 
-        sb.append("<h3>LICENSE</h3>")
+        sb.append("<h3>${getString(R.string.about_license_heading)}</h3>")
         // License is plain text, preserve newlines
         val license = readAsset("LICENSE").replace("\n", "<br/>")
         sb.append(license)
@@ -59,7 +58,7 @@ class AboutFragment : Fragment() {
         return try {
             requireContext().assets.open(fileName).bufferedReader().use { it.readText() }
         } catch (e: Exception) {
-            "Error loading $fileName"
+            getString(R.string.about_error_loading, fileName)
         }
     }
 

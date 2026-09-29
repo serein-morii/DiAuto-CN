@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.content.ContextCompat
+import com.andrerinas.openheadunit.R
 import com.andrerinas.openheadunit.utils.AppLog
 import com.andrerinas.openheadunit.utils.Settings
 import com.andrerinas.openheadunit.utils.ToastUtils
@@ -213,7 +214,7 @@ class NearbyManager(
                             scope.launch(Dispatchers.Main) {
                                 ToastUtils.showToast(
                                     context, 
-                                    "Google Nearby connection failed: Wi-Fi bandwidth upgrade timed out. Please check Wi-Fi & Bluetooth settings.", 
+                                    R.string.nearby_upgrade_timeout, 
                                     android.widget.Toast.LENGTH_LONG
                                 )
                             }

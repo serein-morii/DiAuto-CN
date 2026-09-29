@@ -153,8 +153,8 @@ class KeymapFragment : Fragment(), MainActivity.KeyListener {
                     ?.filter { it != "action" && it != "keyCode" && it != "extra_key_value" }
                     ?.joinToString { "$it=${intent.extras?.get(it)}" } ?: ""
                 
-                val codeText = if (extractedCode != null) "CODE: $extractedCode" else "NO CODE"
-                val displayText = "Action: $action\n$codeText\n$extras"
+                val codeText = if (extractedCode != null) getString(R.string.keymap_debug_code, extractedCode) else getString(R.string.keymap_debug_no_code)
+                val displayText = getString(R.string.keymap_debug_action, action, codeText, extras)
                 
                 keypressDebuggerTextView.text = displayText
                 keypressDebuggerTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.brand_teal))
@@ -207,11 +207,11 @@ class KeymapFragment : Fragment(), MainActivity.KeyListener {
         if (keyCode == KeyEvent.KEYCODE_BACK && assignTargetCode == KeyEvent.KEYCODE_UNKNOWN) return false
 
         val keyName = try { KeyEvent.keyCodeToString(keyCode).replace("KEYCODE_", "") } catch (e: Exception) { "UNKNOWN" }
-        val actionName = if (event.action == KeyEvent.ACTION_DOWN) "DOWN" else "UP"
+        val actionName = getString(if (event.action == KeyEvent.ACTION_DOWN) R.string.keymap_key_down else R.string.keymap_key_up)
         
         AppLog.i("KeymapFragment: Captured $keyName ($keyCode) $actionName")
         
-        keypressDebuggerTextView.text = "Key: $keyName ($keyCode) - $actionName"
+        keypressDebuggerTextView.text = getString(R.string.keymap_key_event, keyName, keyCode, actionName)
         keypressDebuggerTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.brand_teal))
 
         if (assignTargetCode != KeyEvent.KEYCODE_UNKNOWN) {

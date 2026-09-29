@@ -687,7 +687,7 @@ class MainActivity : BaseActivity() {
             AapService.wifiDirectName.collectLatest { name ->
                 val isHelperMode = settings.wifiConnectionMode == 2
                 if (isHelperMode && name != null) {
-                    tvInfo.text = "WiFi Direct: $name"
+                    tvInfo.text = getString(R.string.wifi_direct_name, name)
                     tvInfo.visibility = View.VISIBLE
                 } else {
                     tvInfo.visibility = View.GONE

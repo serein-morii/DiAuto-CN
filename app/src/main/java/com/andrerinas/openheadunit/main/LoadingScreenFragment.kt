@@ -577,22 +577,12 @@ class LoadingScreenFragment : Fragment() {
         }
 
         if (mediaFiles.isEmpty()) {
-            val isGerman = java.util.Locale.getDefault().language == "de"
-            val message = if (useDownloads) {
-                if (isGerman) {
-                    "Keine Bilder oder Videos im Downloads-Ordner gefunden:\n${dir.absolutePath}\n\nBitte kopiere deine Datei in dieses Verzeichnis."
-                } else {
-                    "No images or videos found in Downloads folder:\n${dir.absolutePath}\n\nPlease copy your file to this directory."
-                }
-            } else {
-                if (isGerman) {
-                    "Keine Mediendateien im App-Ordner gefunden:\n${dir.absolutePath}\n\nBitte kopiere dein Startbild/Video in dieses Verzeichnis."
-                } else {
-                    "No media files found in app folder:\n${dir.absolutePath}\n\nPlease copy your startup image/video to this directory."
-                }
-            }
+            val message = getString(
+                if (useDownloads) R.string.loading_no_files_downloads else R.string.loading_no_files_app,
+                dir.absolutePath
+            )
             com.google.android.material.dialog.MaterialAlertDialogBuilder(ctx, R.style.DarkAlertDialog)
-                .setTitle("No files found")
+                .setTitle(R.string.loading_no_files_title)
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, null)
                 .show()

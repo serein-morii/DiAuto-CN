@@ -61,7 +61,7 @@
                     android:id="@+id/disclaimer_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Disclaimer Text..."
+                    android:text="@string/disclaimer_text"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?attr/colorOnSurface"
                     android:lineSpacingMultiplier="1.2"/>

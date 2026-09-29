@@ -1423,7 +1423,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
             } catch (e: Exception) {
                 AppLog.e("Failed to enter PiP mode: ${e.message}")
                 e.printStackTrace()
-                Toast.makeText(this, "PiP failed: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.pip_failed, e.localizedMessage ?: e.javaClass.simpleName), Toast.LENGTH_SHORT).show()
             }
         } else {
             AppLog.w("PiP mode not supported on this Android version (SDK < 26)")
@@ -1906,7 +1906,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
             setTypeface(null, Typeface.BOLD)
             setBackgroundColor(Color.parseColor("#80000000"))
             setPadding(10, 5, 10, 5)
-            text = "FPS: --\nCPU: -- / --\nTemp: --\nFrame: --"
+            text = getString(R.string.fps_overlay_placeholder)
             // Lift it above everything
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 elevation = 100f
@@ -1976,7 +1976,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
             ?: metrics.loadAverage?.let { String.format(java.util.Locale.US, "%.2f load", it) }
             ?: "--"
         val tempText = metrics.temperatureC?.let { "${it}C" } ?: "--"
-        return "FPS: $fpsText\nCPU: app $appCpuText / sys $totalCpuText\nTemp: $tempText\nFrame: $frameAgeText"
+        return getString(R.string.fps_overlay_format, fpsText, appCpuText, totalCpuText, tempText, frameAgeText)
     }
 
     private class PerformanceSampler {

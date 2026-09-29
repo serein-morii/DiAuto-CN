@@ -188,7 +188,7 @@ class AutoStartFragment : Fragment() {
                 name = if (settings.autoStartBluetoothDeviceMac == firstMac) {
                     settings.autoStartBluetoothDeviceName
                 } else {
-                    "Unknown Device"
+                    getString(R.string.unknown_device)
                 }
             }
             settings.autoStartBluetoothDeviceName = name
@@ -459,7 +459,7 @@ class AutoStartFragment : Fragment() {
         }
 
         val deviceNames = bondedDevices.map { device ->
-            val hardwareName = device.name ?: "Unknown Device"
+            val hardwareName = device.name ?: getString(R.string.unknown_device)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val alias = device.alias
                 if (!alias.isNullOrEmpty() && alias != hardwareName) {

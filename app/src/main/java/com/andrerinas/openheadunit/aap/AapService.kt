@@ -3021,7 +3021,7 @@ class AapService : Service(), UsbReceiver.Listener {
                     AppLog.w("SelfMode: Headunit Server (127.0.0.1:5277) is NOT running.")
                     ToastUtils.showToast(
                         this@AapService,
-                        "Android Auto 17.4+ detected: Please start 'Headunit Server' in Android Auto Developer Settings!",
+                        R.string.self_mode_need_headunit_server,
                         Toast.LENGTH_LONG
                     )
                     openAaSettings()

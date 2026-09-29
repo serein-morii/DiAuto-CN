@@ -531,7 +531,7 @@
     <string name="support_rules_oneissue_title">One problem per issue</string>
     <string name="support_rules_oneissue_desc">Keep each issue to a single problem so it can be tracked and fixed. Open separate issues for unrelated problems.</string>
     <string name="version">Version</string>
-    <string name="about_title">About Open Headunit</string>
+    <string name="about_title">About DiAuto CN</string>
     <string name="copyright">© 2025-%d André Rinas</string>
 
     <!-- Safety Disclaimer -->
@@ -1010,4 +1010,45 @@
     <string name="da_diag_choose_location">Choose location</string>
     <string name="da_diag_clip_label">Diagnostic report</string>
     <string name="no_paired_bluetooth_devices">No paired Bluetooth devices found</string>
+    <string name="unknown_device">Unknown device</string>
+    <string name="keymap_press_any_key">Press any key to test…</string>
+    <string name="keymap_key_event">Key: %1$s (%2$d) — %3$s</string>
+    <string name="keymap_key_down">Down</string>
+    <string name="keymap_key_up">Up</string>
+    <string name="keymap_debug_action">Action: %1$s\n%2$s\n%3$s</string>
+    <string name="keymap_debug_code">CODE: %1$d</string>
+    <string name="keymap_debug_no_code">NO CODE</string>
+    <string name="wifi_direct_name">Wi-Fi Direct: %1$s</string>
+    <string name="pip_failed">Picture-in-picture failed: %1$s</string>
+    <string name="fps_overlay_placeholder">FPS: --\nCPU: -- / --\nTemp: --\nFrame: --</string>
+    <string name="fps_overlay_format">FPS: %1$s\nCPU: app %2$s / sys %3$s\nTemp: %4$s\nFrame: %5$s</string>
+    <string name="loading_no_files_title">No files found</string>
+    <string name="loading_no_files_downloads">No images or videos found in the Downloads folder:\n%1$s\n\nCopy your file into this directory.</string>
+    <string name="loading_no_files_app">No media files found in the app folder:\n%1$s\n\nCopy your startup image or video into this directory.</string>
+    <string name="about_thanks_mike">Special thanks to Mike Reid for the original Android Auto protocol work.</string>
+    <string name="about_source_link">DiAuto source and releases</string>
+    <string name="about_intro">An independent Android Auto receiver for BYD DiLink. Based on Open Headunit. Thanks to its authors and contributors. Not affiliated with Google or BYD.</string>
+    <string name="about_license_heading">LICENSE</string>
+    <string name="about_error_loading">Could not load %1$s</string>
+    <string name="local_hotspot_requires_android_8">Local hotspot requires Android 8 or later. Choose Wi-Fi Direct or car hotspot.</string>
+    <string name="local_hotspot_not_ready">Local hotspot did not become ready. Disconnect the car from home Wi-Fi or turn off its shared hotspot, then retry.</string>
+    <string name="local_hotspot_stopped">Android stopped the local hotspot. Connect again when Wi-Fi is available.</string>
+    <string name="local_hotspot_start_failed">Local hotspot could not start (Android reason %1$d). Disconnect home Wi-Fi or turn off the car\'s shared hotspot, then retry.</string>
+    <string name="local_hotspot_need_permissions">Allow Nearby devices and Location before starting the local hotspot.</string>
+    <string name="local_hotspot_cannot_start_5ghz">This car could not start a standalone 5 GHz hotspot. Choose Wi-Fi Direct or car hotspot.</string>
+    <string name="local_hotspot_no_wpa2">Android did not provide a compatible WPA2 local hotspot. Choose another connection.</string>
+    <string name="local_hotspot_not_5ghz">This car selected %1$d MHz for its local hotspot, not 5 GHz. Use the car hotspot set to 5 GHz, or Wi-Fi Direct.</string>
+    <string name="local_hotspot_android10_24ghz">This Android 10 firmware always places the local hotspot on 2.4 GHz. Use the car hotspot set to 5 GHz, or Wi-Fi Direct.</string>
+    <string name="local_hotspot_client_24ghz">The local hotspot landed on 2.4 GHz while the car Wi-Fi client was using a 2.4 GHz network. Turn the car Wi-Fi client off and try again, or choose car hotspot / Wi-Fi Direct.</string>
+    <string name="local_hotspot_channel_unreadable">Cannot read this car\'s local hotspot channel (%1$s). Choose a 5 GHz car hotspot or Wi-Fi Direct.</string>
+    <string name="local_hotspot_radio_unsettled">radio did not settle</string>
+    <string name="local_hotspot_address_unreadable">The local hotspot address could not be read. Choose Wi-Fi Direct or car hotspot.</string>
+    <string name="wifi_direct_retry_5ghz">Native Android Auto Wi-Fi Direct started on %1$s. Retrying 5 GHz…</string>
+    <string name="wifi_direct_unfriendly_channel">Wi-Fi Direct is on %1$s, which most phones cannot join. Restart Wi-Fi and try again.</string>
+    <string name="wifi_direct_requires_wifi">Native Android Auto needs Wi-Fi. Please turn it on.</string>
+    <string name="wifi_direct_in_use">Wi-Fi Direct is in use by another app. Disconnect it before connecting DiAuto.</string>
+    <string name="wifi_direct_native_status">Native Android Auto Wi-Fi Direct: %1$s (%2$s), %3$s</string>
+    <string name="wifi_direct_frequency_unknown">frequency unknown</string>
+    <string name="nearby_upgrade_timeout">Google Nearby connection failed: the Wi-Fi upgrade timed out. Check Wi-Fi and Bluetooth settings.</string>
+    <string name="self_mode_need_headunit_server">Android Auto 17.4+ detected. Start Headunit Server in Android Auto developer settings.</string>
 </resources>
