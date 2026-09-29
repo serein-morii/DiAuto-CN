@@ -1,0 +1,18 @@
+app/src/main/res/values-zh-rCN/arrays.xml
+  h_d554d32aa9d663 1-35
+app/src/main/res/values-zh-rCN/diauto.xml
+  h_d554d32aa9d663 1-38
+app/src/main/res/values/diauto.xml
+  h_d554d32aa9d663 9,38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "29e21b88fa3f14274bb9da157316bb79a324c9b2",
+  "prompts": {},
+  "humans": {
+    "h_d554d32aa9d663": {
+      "author": "pengchenghui <pengchenghui@jtexpress.com>"
+    }
+  }
+}
