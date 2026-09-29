@@ -1,0 +1,102 @@
+.github/workflows/release.yml
+  h_d554d32aa9d663 1-60
+README.md
+  h_d554d32aa9d663 1,3-5
+README.zh-CN.md
+  h_d554d32aa9d663 1-7
+app/build.gradle.kts
+  h_d554d32aa9d663 71
+app/src/debug/AndroidManifest.xml
+  h_d554d32aa9d663 9
+app/src/debug/java/com/andrerinas/openheadunit/hud/StandaloneHudDemoActivity.kt
+  h_d554d32aa9d663 84
+app/src/main/java/com/andrerinas/openheadunit/aap/AapService.kt
+  h_d554d32aa9d663 3024
+app/src/main/java/com/andrerinas/openheadunit/connection/LocalHotspotCredentialsProvider.kt
+  h_d554d32aa9d663 11,48,58,69,72,76,79,188,228,253,255,260,295
+app/src/main/java/com/andrerinas/openheadunit/connection/NearbyManager.kt
+  h_d554d32aa9d663 8,217
+app/src/main/java/com/andrerinas/openheadunit/connection/WifiDirectManager.kt
+  h_d554d32aa9d663 636,659,1169,1551-1552,1674
+app/src/main/java/com/andrerinas/openheadunit/hud/BydCarServerNavigationOutput.kt
+  h_d554d32aa9d663 20
+app/src/main/java/com/andrerinas/openheadunit/hud/BydFactoryNavigationOutput.kt
+  h_d554d32aa9d663 15
+app/src/main/java/com/andrerinas/openheadunit/hud/BydNavigationOutputs.kt
+  h_d554d32aa9d663 58
+app/src/main/java/com/andrerinas/openheadunit/hud/BydStandaloneHudOutput.kt
+  h_d554d32aa9d663 51-52
+app/src/main/java/com/andrerinas/openheadunit/hud/BydStarterBridge.kt
+  h_d554d32aa9d663 29,39
+app/src/main/java/com/andrerinas/openheadunit/utils/LocaleHelper.kt
+  h_d554d32aa9d663 95-96,101-125,128,196
+app/src/main/res/values-ar/diauto.xml
+  h_d554d32aa9d663 3,32
+app/src/main/res/values-ar/strings.xml
+  h_d554d32aa9d663 2,962-982
+app/src/main/res/values-cs/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values-de/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values-es-rES/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values-es/diauto.xml
+  h_d554d32aa9d663 3,32
+app/src/main/res/values-es/strings.xml
+  h_d554d32aa9d663 2,972-992
+app/src/main/res/values-hu/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values-it/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values-ja/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values-ka/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values-ko/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values-nl/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values-pl/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values-pt-rBR/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values-ro/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values-ru/diauto.xml
+  h_d554d32aa9d663 3,32
+app/src/main/res/values-ru/strings.xml
+  h_d554d32aa9d663 2,963-983
+app/src/main/res/values-tr/strings.xml
+  h_d554d32aa9d663 3
+app/src/main/res/values-uk/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values-vi/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values-zh-rCN/diauto.xml
+  h_d554d32aa9d663 3,32
+app/src/main/res/values-zh-rCN/strings.xml
+  h_d554d32aa9d663 2,963-984
+app/src/main/res/values-zh-rTW/strings.xml
+  h_d554d32aa9d663 2
+app/src/main/res/values/diauto.xml
+  h_d554d32aa9d663 9,38
+app/src/main/res/values/strings.xml
+  h_d554d32aa9d663 2,1016-1037
+app/src/main/res/xml/shortcuts.xml
+  h_d554d32aa9d663 11,22,34,46,58,72,86
+contract/src/main/java/com/andrerinas/openheadunit/contract/HeadUnitIntent.kt
+  h_d554d32aa9d663 15
+docs/GITHUB_RELEASE.md
+  h_d554d32aa9d663 1-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "78b420f1cdaa6898852b9bae13cd39f2af3d8809",
+  "prompts": {},
+  "humans": {
+    "h_d554d32aa9d663": {
+      "author": "pengchenghui <pengchenghui@jtexpress.com>"
+    }
+  }
+}
