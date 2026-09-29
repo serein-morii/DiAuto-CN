@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DiAuto</string>
+    <string name="app_name">DiAuto CN</string>
     <string name="menu">Menú</string>
     <string name="settings">Configuración</string>
 
@@ -969,4 +969,25 @@
     <string name="audio_queue_backlog">Sin límite (máxima cola)</string>
     <string name="keymap_test_hint">Pulsa cualquier tecla para probar…</string>
     <string name="keymap_test_event">Tecla: %1$s (%2$d) · %3$s</string>
+    <string name="wifi_direct_retry_5ghz">Native Android Auto Wi-Fi Direct started on %1$s. Retrying 5 GHz…</string>
+    <string name="wifi_direct_unfriendly_channel">Wi-Fi Direct is on %1$s, which most phones cannot join. Restart Wi-Fi and try again.</string>
+    <string name="wifi_direct_requires_wifi">Native Android Auto needs Wi-Fi. Please turn it on.</string>
+    <string name="wifi_direct_in_use">Wi-Fi Direct is in use by another app. Disconnect it before connecting DiAuto.</string>
+    <string name="wifi_direct_native_status">Native Android Auto Wi-Fi Direct: %1$s (%2$s), %3$s</string>
+    <string name="wifi_direct_frequency_unknown">frequency unknown</string>
+    <string name="nearby_upgrade_timeout">Google Nearby connection failed: the Wi-Fi upgrade timed out. Check Wi-Fi and Bluetooth settings.</string>
+    <string name="self_mode_need_headunit_server">Android Auto 17.4+ detected. Start Headunit Server in Android Auto developer settings.</string>
+    <string name="local_hotspot_requires_android_8">Local hotspot requires Android 8 or later. Choose Wi-Fi Direct or car hotspot.</string>
+    <string name="local_hotspot_not_ready">Local hotspot did not become ready. Disconnect the car from home Wi-Fi or turn off its shared hotspot, then retry.</string>
+    <string name="local_hotspot_stopped">Android stopped the local hotspot. Connect again when Wi-Fi is available.</string>
+    <string name="local_hotspot_start_failed">Local hotspot could not start (Android reason %1$d). Disconnect home Wi-Fi or turn off the car\'s shared hotspot, then retry.</string>
+    <string name="local_hotspot_need_permissions">Allow Nearby devices and Location before starting the local hotspot.</string>
+    <string name="local_hotspot_cannot_start_5ghz">This car could not start a standalone 5 GHz hotspot. Choose Wi-Fi Direct or car hotspot.</string>
+    <string name="local_hotspot_no_wpa2">Android did not provide a compatible WPA2 local hotspot. Choose another connection.</string>
+    <string name="local_hotspot_not_5ghz">This car selected %1$d MHz for its local hotspot, not 5 GHz. Use the car hotspot set to 5 GHz, or Wi-Fi Direct.</string>
+    <string name="local_hotspot_android10_24ghz">This Android 10 firmware always places the local hotspot on 2.4 GHz. Use the car hotspot set to 5 GHz, or Wi-Fi Direct.</string>
+    <string name="local_hotspot_client_24ghz">The local hotspot landed on 2.4 GHz while the car Wi-Fi client was using a 2.4 GHz network. Turn the car Wi-Fi client off and try again, or choose car hotspot / Wi-Fi Direct.</string>
+    <string name="local_hotspot_channel_unreadable">Cannot read this car\'s local hotspot channel (%1$s). Choose a 5 GHz car hotspot or Wi-Fi Direct.</string>
+    <string name="local_hotspot_radio_unsettled">radio did not settle</string>
+    <string name="local_hotspot_address_unreadable">The local hotspot address could not be read. Choose Wi-Fi Direct or car hotspot.</string>
 </resources>

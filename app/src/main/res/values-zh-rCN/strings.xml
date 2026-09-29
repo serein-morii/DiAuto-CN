@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DiAuto</string>
+    <string name="app_name">DiAuto CN</string>
     <string name="menu">菜单</string>
     <string name="settings">设置</string>
     <string name="title_activity_settings">设置行为</string>
@@ -960,4 +960,26 @@
     <string name="audio_queue_backlog">无限制（最大积压）</string>
     <string name="keymap_test_hint">按任意键进行测试…</string>
     <string name="keymap_test_event">按键：%1$s（%2$d）· %3$s</string>
+
+    <string name="wifi_direct_retry_5ghz">原生 Android Auto 的 Wi-Fi Direct 已在 %1$s 启动，正在重试 5 GHz…</string>
+    <string name="wifi_direct_unfriendly_channel">Wi-Fi Direct 当前在 %1$s，多数手机无法加入。请重启 Wi-Fi 后再试。</string>
+    <string name="wifi_direct_requires_wifi">原生 Android Auto 需要打开 Wi-Fi。</string>
+    <string name="wifi_direct_in_use">Wi-Fi Direct 正被其他应用占用。请先断开后再连接 DiAuto。</string>
+    <string name="wifi_direct_native_status">原生 Android Auto Wi-Fi Direct：%1$s（%2$s），%3$s</string>
+    <string name="wifi_direct_frequency_unknown">频率未知</string>
+    <string name="nearby_upgrade_timeout">Google Nearby 连接失败：Wi-Fi 带宽升级超时。请检查 Wi-Fi 和蓝牙设置。</string>
+    <string name="self_mode_need_headunit_server">检测到 Android Auto 17.4 及以上。请在 Android Auto 开发者设置中启动 Headunit Server。</string>
+    <string name="local_hotspot_requires_android_8">本地热点需要 Android 8 或更高版本。请改用 Wi-Fi Direct 或车机热点。</string>
+    <string name="local_hotspot_not_ready">本地热点未能就绪。请断开车机与家庭 Wi-Fi 的连接，或关闭车机共享热点后重试。</string>
+    <string name="local_hotspot_stopped">系统已停止本地热点。请在 Wi-Fi 可用时再连接。</string>
+    <string name="local_hotspot_start_failed">本地热点无法启动（Android 原因 %1$d）。请断开家庭 Wi-Fi，或关闭车机共享热点后重试。</string>
+    <string name="local_hotspot_need_permissions">启动本地热点前，请允许“附近的设备”和“位置”权限。</string>
+    <string name="local_hotspot_cannot_start_5ghz">此车机无法启动独立的 5 GHz 热点。请改用 Wi-Fi Direct 或车机热点。</string>
+    <string name="local_hotspot_no_wpa2">系统未提供兼容的 WPA2 本地热点。请改用其他连接方式。</string>
+    <string name="local_hotspot_not_5ghz">此车机把本地热点放在了 %1$d MHz，而不是 5 GHz。请将车机热点设为 5 GHz，或改用 Wi-Fi Direct。</string>
+    <string name="local_hotspot_android10_24ghz">此 Android 10 固件总是把本地热点放在 2.4 GHz。请使用设为 5 GHz 的车机热点，或改用 Wi-Fi Direct。</string>
+    <string name="local_hotspot_client_24ghz">车机 Wi-Fi 客户端正在使用 2.4 GHz 网络，本地热点也落到了 2.4 GHz。请关闭车机 Wi-Fi 客户端后重试，或改用车机热点 / Wi-Fi Direct。</string>
+    <string name="local_hotspot_channel_unreadable">无法读取此车机的本地热点信道（%1$s）。请改用 5 GHz 车机热点或 Wi-Fi Direct。</string>
+    <string name="local_hotspot_radio_unsettled">无线模块未稳定</string>
+    <string name="local_hotspot_address_unreadable">无法读取本地热点地址。请改用 Wi-Fi Direct 或车机热点。</string>
 </resources>

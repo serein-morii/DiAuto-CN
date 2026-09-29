@@ -1,6 +1,8 @@
-# DiAuto
+# DiAuto CN
 
-**Android Auto on your BYD display. Wireless or USB.**
+> 简体中文说明见 [README.zh-CN.md](README.zh-CN.md)。本仓库基于上游 DiAuto `v0.3.10`。
+
+**Android Auto on your BYD display. Wireless or USB.** Independent app: `com.andrerinas.headunitrevived.cn`.
 
 > **BYD support scope:** These projects focus on BYD cars. They may work on other brands, but other brands are unsupported and there are no plans to add support or fix brand-specific incompatibilities.
 

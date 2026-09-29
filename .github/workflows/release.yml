@@ -1,0 +1,60 @@
+name: Release Chinese APK
+
+on:
+  push:
+    tags:
+      - 'v*-cn.*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
+      - name: Install pinned NDK and CMake
+        run: |
+          for attempt in 1 2 3; do
+            sdkmanager "platforms;android-36" "build-tools;36.0.0" "ndk;29.0.14206865" "cmake;3.22.1" && exit 0
+            echo "sdkmanager attempt $attempt failed; retrying in 15s..." >&2
+            sleep 15
+          done
+          echo "sdkmanager failed after 3 attempts" >&2
+          exit 1
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Test and build github debug APK
+        run: ./gradlew :app:testGithubDebugUnitTest :app:assembleGithubDebug --stacktrace
+      - name: Prepare release files
+        shell: bash
+        run: |
+          set -euo pipefail
+          src=$(ls app/build/outputs/apk/github/debug/*.apk | head -n 1)
+          apk="DiAuto-cn-${GITHUB_REF_NAME}.apk"
+          cp "$src" "$apk"
+          sha256sum "$apk" > "$apk.sha256"
+          cp docs/GITHUB_RELEASE.md release-notes.md
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          apk="DiAuto-cn-${GITHUB_REF_NAME}.apk"
+          gh release delete "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --yes || true
+          gh release create "$GITHUB_REF_NAME" \
+            "$apk#DiAuto CN" \
+            "$apk.sha256#SHA-256" \
+            --repo "$GITHUB_REPOSITORY" \
+            --verify-tag \
+            --title "DiAuto CN 0.3.10" \
+            --notes-file release-notes.md

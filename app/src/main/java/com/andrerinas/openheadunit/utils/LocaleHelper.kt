@@ -92,12 +92,40 @@ object LocaleHelper {
 
     private const val KEY = "app-language"
     private const val MIGRATED = "app-language-platform-migrated"
+    private const val CN_DEFAULT = "app-language-cn-default"
+    private val supportedLanguages = setOf("en", "zh", "ar", "ru", "es")
 
     private fun preferences(context: Context) =
         context.getSharedPreferences(Settings.PREFS_NAME, Context.MODE_PRIVATE)
 
+    private fun deviceLanguage(context: Context): String {
+        @Suppress("DEPRECATION")
+        val locale = if (Build.VERSION.SDK_INT >= 24) {
+            context.resources.configuration.locales[0]
+        } else {
+            context.resources.configuration.locale
+        }
+        return locale.language.lowercase(Locale.ROOT)
+    }
+
+    private fun applyCnDefaultIfNeeded(context: Context) {
+        val prefs = preferences(context)
+        if (prefs.getBoolean(CN_DEFAULT, false)) return
+        val fallback = if (deviceLanguage(context) in supportedLanguages) null else "zh-CN"
+        if (Build.VERSION.SDK_INT >= 33) {
+            val manager = context.getSystemService(android.app.LocaleManager::class.java)
+            if (manager.applicationLocales.isEmpty && !prefs.contains(KEY) && fallback != null) {
+                stringToLocale(fallback)?.let { manager.applicationLocales = android.os.LocaleList(it) }
+            }
+        } else if (!prefs.contains(KEY) && fallback != null) {
+            prefs.edit().putString(KEY, fallback).apply()
+        }
+        prefs.edit().putBoolean(CN_DEFAULT, true).apply()
+    }
+
     /** Android 13 settings and the in-app picker share the same source of truth. */
     fun preference(context: Context): String {
+        applyCnDefaultIfNeeded(context)
         if (Build.VERSION.SDK_INT >= 33) {
             migrate(context)
             val locales = context.getSystemService(android.app.LocaleManager::class.java).applicationLocales
@@ -165,6 +193,7 @@ object LocaleHelper {
             if (isLocked) {
                 return context
             }
+            applyCnDefaultIfNeeded(context)
             val settings = Settings(context)
             return applyLocale(context, settings)
         } catch (e: Exception) {

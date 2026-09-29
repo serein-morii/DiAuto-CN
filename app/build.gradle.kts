@@ -68,7 +68,7 @@ android {
 
     defaultConfig {
         // Preserve upgrade compatibility and existing DiLink pairing/calibration.
-        applicationId = "com.andrerinas.headunitrevived"
+        applicationId = "com.andrerinas.headunitrevived.cn"
         minSdk = 16
         targetSdk = 36
         versionCode = 110
@@ -161,8 +161,6 @@ android {
         }
 
         getByName("debug") {
-            applicationIdSuffix = ".bydhudtest"
-            versionNameSuffix = "-hud-test"
         }
     }
 

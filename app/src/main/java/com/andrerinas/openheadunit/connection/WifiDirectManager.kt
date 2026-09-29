@@ -633,7 +633,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
                 } else if (shouldRetryNativeGroupFor5Ghz(frequency)) {
                     native5GhzBandMismatchRetries++
                     AppLog.w("WifiDirectManager: Native AA group was requested as 5GHz but came up on $frequency MHz ($band). Recreating 5GHz group (mismatch retry $native5GhzBandMismatchRetries/$MAX_NATIVE_5GHZ_BAND_MISMATCH_RETRIES).")
-                    showToast("Native AA WiFi Direct started on $band. Retrying 5GHz...")
+                    showToast(context.getString(R.string.wifi_direct_retry_5ghz, band))
                     removeGroupAndRetryNative5Ghz()
                     return
                 }
@@ -656,7 +656,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
                     if (ssid != lastUnfriendlyChannelSsid) {
                         lastUnfriendlyChannelSsid = ssid
                         AppLog.e("WifiDirectManager: WiFi Direct group came up on ${P2pChannelPolicy.describe(frequency)} ($frequency MHz). Carrying on, but a phone limited to channels 1-11 will not find this network: it will scan and never see the SSID. Restarting this unit's WiFi, or giving it a WiFi country code, is what moves the group off channel 12/13.")
-                        showToast("WiFi Direct is on ${P2pChannelPolicy.describe(frequency)}, which most phones cannot join. Restart WiFi and try again.")
+                        showToast(context.getString(R.string.wifi_direct_unfriendly_channel, P2pChannelPolicy.describe(frequency)))
                     }
                 } else if (frequency > 0) {
                     lastUnfriendlyChannelSsid = null
@@ -1166,7 +1166,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
                 @Suppress("DEPRECATION")
                 wifiManager.isWifiEnabled = true
             } else {
-                showToast("Native AA requires Wi-Fi. Please turn it on.")
+                showToast(context.getString(R.string.wifi_direct_requires_wifi))
                 // We return for now, the user must turn it on. In the future we could open settings.
                 isGroupCreatingOrCreated = false
                 return
@@ -1548,8 +1548,8 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
     }
 
     private fun notifyNativeGroupStarted(ssid: String, frequency: Int, band: String) {
-        val frequencyText = if (frequency > 0) "$frequency MHz" else "frequency unknown"
-        val message = "Native AA WiFi Direct: $band ($frequencyText), $nativeGroupCreationMode"
+        val frequencyText = if (frequency > 0) "$frequency MHz" else context.getString(R.string.wifi_direct_frequency_unknown)
+        val message = context.getString(R.string.wifi_direct_native_status, band, frequencyText, nativeGroupCreationMode)
         if (message == lastNativeGroupStatusMessage) return
 
         lastNativeGroupStatusMessage = message
@@ -1671,7 +1671,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
         handler.removeCallbacks(discoveryRunnable)
         cancelNativeJoinWatchdog()
         AppLog.w("WifiDirectManager: Another app owns Wi-Fi Direct; leaving its connection untouched. Exit that app before starting DiAuto.")
-        showToast("Wi-Fi Direct is in use by another app. Disconnect it before connecting DiAuto.")
+        showToast(context.getString(R.string.wifi_direct_in_use))
     }
 
     /** A removeGroup call acts on the whole radio, even when another app now owns it. */

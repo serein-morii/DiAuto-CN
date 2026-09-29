@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import com.andrerinas.openheadunit.R
 import com.andrerinas.openheadunit.aap.ApInterfaceCandidate
 import com.andrerinas.openheadunit.aap.LocalHotspotPolicy
 import com.andrerinas.openheadunit.aap.NativeCredentialsPolicy
@@ -44,7 +45,7 @@ class LocalHotspotCredentialsProvider(private val context: Context, private val 
     fun start() { main.post {
         if (requested) { publish(); return@post }
         if (Build.VERSION.SDK_INT < 26) {
-            report("Local hotspot requires Android 8 or later. Choose Wi-Fi Direct or Car hotspot.")
+            report(context.getString(R.string.local_hotspot_requires_android_8))
             return@post
         }
                 lastFailure = null
@@ -54,7 +55,7 @@ class LocalHotspotCredentialsProvider(private val context: Context, private val 
                 val before = interfaces().mapNotNull { it.siteLocalIpv4 }.toSet()
         val upstreams = upstreamInterfaces()
         timeout = Runnable {
-            if (current(token)) fail("Local hotspot did not become ready. Disconnect the car from home Wi-Fi or turn off its shared hotspot, then retry.")
+            if (current(token)) fail(context.getString(R.string.local_hotspot_not_ready))
         }.also { main.postDelayed(it, 25_000) }
         try {
             AppLog.i("LocalHotspot: starting Android=${Build.VERSION.RELEASE} sdk=${Build.VERSION.SDK_INT} with Wi-Fi client enabled=${wifi.isWifiEnabled}")
@@ -65,17 +66,17 @@ class LocalHotspotCredentialsProvider(private val context: Context, private val 
                     resolve(token, value, before, upstreams)
                 }
                 override fun onStopped() {
-                    if (current(token)) fail("Android stopped the local hotspot. Connect again when the Wi-Fi radio is available.")
+                    if (current(token)) fail(context.getString(R.string.local_hotspot_stopped))
                 }
                 override fun onFailed(reason: Int) {
-                    if (current(token)) fail("Local hotspot could not start (Android reason $reason). Disconnect home Wi-Fi or turn off the car's shared hotspot, then retry.")
+                    if (current(token)) fail(context.getString(R.string.local_hotspot_start_failed, reason))
                 }
             })
         } catch (_: SecurityException) {
-            fail("Allow Nearby devices and Location in app permissions before starting the local hotspot.")
+            fail(context.getString(R.string.local_hotspot_need_permissions))
         } catch (e: Exception) {
             AppLog.w("LocalHotspot: start failed: ${e.javaClass.simpleName}")
-            fail("This car could not start a standalone 5 GHz hotspot. Choose Wi-Fi Direct or Car hotspot.")
+            fail(context.getString(R.string.local_hotspot_cannot_start_5ghz))
         }
     } }
 
@@ -184,7 +185,7 @@ class LocalHotspotCredentialsProvider(private val context: Context, private val 
                 val wpa2 = if (modern != null) modern.securityType in listOf(1, 2)
                     else legacy?.allowedKeyManagement?.get(android.net.wifi.WifiConfiguration.KeyMgmt.WPA2_PSK) == true
                 if (ssid.isNullOrBlank() || password.isNullOrBlank() || !wpa2) {
-                    withContext(Dispatchers.Main) { if (current(token)) fail("Android did not provide a compatible WPA2 local hotspot. Choose another transport.") }
+                    withContext(Dispatchers.Main) { if (current(token)) fail(context.getString(R.string.local_hotspot_no_wpa2)) }
                     return@launch
                 }
                 // Configured BSSID is often null. Only accept a newly assigned AP address;
@@ -224,7 +225,7 @@ class LocalHotspotCredentialsProvider(private val context: Context, private val 
                             when {
                                 // A settled live reading outranks everything: trust it, 5 GHz or not.
                                 frequency != null -> if (frequency !in 5160..5895) {
-                                    withContext(Dispatchers.Main) { if (current(token)) fail("This car selected ${frequency} MHz for its local hotspot, not 5 GHz. Choose Hotspot with the car's hotspot set to 5 GHz, or Wi-Fi Direct.") }
+                                    withContext(Dispatchers.Main) { if (current(token)) fail(context.getString(R.string.local_hotspot_not_5ghz, frequency)) }
                                     return@launch
                                 } else if (loggedRadio != (candidate.name to frequency)) {
                                     loggedRadio = candidate.name to frequency
@@ -249,14 +250,14 @@ class LocalHotspotCredentialsProvider(private val context: Context, private val 
                                     // down by a 2.4 GHz-associated car Wi-Fi client, where
                                     // switching it off is the remedy.
                                     if (Build.VERSION.SDK_INT < 30) {
-                                        withContext(Dispatchers.Main) { if (current(token)) fail("This Android 10 firmware always places the local hotspot on 2.4 GHz; use the car's own Hotspot (set to 5 GHz) or Wi-Fi Direct.") }
+                                        withContext(Dispatchers.Main) { if (current(token)) fail(context.getString(R.string.local_hotspot_android10_24ghz)) }
                                     } else {
-                                        withContext(Dispatchers.Main) { if (current(token)) fail("This firmware placed the local hotspot on 2.4 GHz while the car's Wi-Fi client was using a 2.4 GHz network; turn the car's Wi-Fi client off and try again, or choose Hotspot / Wi-Fi Direct.") }
+                                        withContext(Dispatchers.Main) { if (current(token)) fail(context.getString(R.string.local_hotspot_client_24ghz)) }
                                     }
                                     return@launch
                                 }
                                 now - radioStarted >= 6_000 -> {
-                                    withContext(Dispatchers.Main) { if (current(token)) fail("Cannot read this car's local hotspot channel (${reading.error ?: "radio did not settle"}). Choose a 5 GHz Car hotspot or Wi-Fi Direct.") }
+                                    withContext(Dispatchers.Main) { if (current(token)) fail(context.getString(R.string.local_hotspot_channel_unreadable, reading.error ?: context.getString(R.string.local_hotspot_radio_unsettled))) }
                                     return@launch
                                 }
                                 else -> {
@@ -291,7 +292,7 @@ class LocalHotspotCredentialsProvider(private val context: Context, private val 
             } catch (e: CancellationException) { throw e }
             catch (e: Exception) {
                 AppLog.w("LocalHotspot: resolve failed: ${e.javaClass.simpleName}")
-                withContext(Dispatchers.Main) { if (current(token)) fail("The local hotspot address could not be read. Choose Wi-Fi Direct or Car hotspot.") }
+                withContext(Dispatchers.Main) { if (current(token)) fail(context.getString(R.string.local_hotspot_address_unreadable)) }
             }
         }
     }
