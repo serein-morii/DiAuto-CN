@@ -1,0 +1,44 @@
+app/src/main/java/com/andrerinas/openheadunit/aap/AapProjectionActivity.kt
+  h_d554d32aa9d663 1426,1909,1979
+app/src/main/java/com/andrerinas/openheadunit/aap/AapService.kt
+  h_d554d32aa9d663 3024
+app/src/main/java/com/andrerinas/openheadunit/connection/LocalHotspotCredentialsProvider.kt
+  h_d554d32aa9d663 11,48,58,69,72,76,79,188,228,253,255,260,295
+app/src/main/java/com/andrerinas/openheadunit/connection/NativeAaHandshakeManager.kt
+  h_d554d32aa9d663 9,946
+app/src/main/java/com/andrerinas/openheadunit/connection/NearbyManager.kt
+  h_d554d32aa9d663 8,217
+app/src/main/java/com/andrerinas/openheadunit/connection/WifiDirectManager.kt
+  h_d554d32aa9d663 636,659,1169,1551-1552,1674
+app/src/main/java/com/andrerinas/openheadunit/main/AboutFragment.kt
+  h_d554d32aa9d663 38,40-43,48,61
+app/src/main/java/com/andrerinas/openheadunit/main/AutoStartFragment.kt
+  h_d554d32aa9d663 191,462
+app/src/main/java/com/andrerinas/openheadunit/main/KeymapFragment.kt
+  h_d554d32aa9d663 156-157,210,214
+app/src/main/java/com/andrerinas/openheadunit/main/LoadingScreenFragment.kt
+  h_d554d32aa9d663 580-583,585
+app/src/main/java/com/andrerinas/openheadunit/main/MainActivity.kt
+  h_d554d32aa9d663 690
+app/src/main/res/layout/dialog_safety_disclaimer.xml
+  h_d554d32aa9d663 64
+app/src/main/res/layout/fragment_about.xml
+  h_d554d32aa9d663 57
+app/src/main/res/layout/fragment_keymap.xml
+  h_d554d32aa9d663 39
+app/src/main/res/values-zh-rCN/strings.xml
+  h_d554d32aa9d663 262,973-1013
+app/src/main/res/values/strings.xml
+  h_d554d32aa9d663 534,1013-1053
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d3d1068c5c1276dda7b64467a8a18cbb2d16c361",
+  "prompts": {},
+  "humans": {
+    "h_d554d32aa9d663": {
+      "author": "pengchenghui <pengchenghui@jtexpress.com>"
+    }
+  }
+}
