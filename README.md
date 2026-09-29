@@ -1,4 +1,6 @@
-# DiAuto
+# DiAuto CN
+
+> 简体中文版请参阅 [README.zh-CN.md](README.zh-CN.md)。本仓库基于上游 DiAuto `v0.3.9`，已补充简体中文界面。
 
 **Android Auto on your BYD display. Wireless or USB.**
 

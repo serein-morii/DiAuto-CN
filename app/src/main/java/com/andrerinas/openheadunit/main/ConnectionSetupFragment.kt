@@ -54,17 +54,17 @@ class ConnectionSetupFragment : Fragment() {
         val previousScroll = scroll?.scrollY ?: 0
         root.removeAllViews()
         root.addView(MaterialToolbar(requireContext()).apply {
-            title = "Connection setup"
+            title = getString(R.string.da_connection_setup)
             setTitleTextColor(color(R.color.da_text))
             setNavigationIcon(R.drawable.ic_arrow_back_white)
             setNavigationOnClickListener { findNavController().popBackStack() }
         })
-        text(root, "Set up once. Ready for the next drive.", 28)
-        text(root, "Your details stay saved. Changes apply to the next connection.", 16)
-        card(root, "1 · Choose your connection") { box ->
+        text(root, getString(R.string.da_cs_headline), 28)
+        text(root, getString(R.string.da_cs_subhead), 16)
+        card(root, getString(R.string.da_cs_step_choose)) { box ->
             val options = listOf(
-                Triple(1, "Built-in car hotspot", "Use the car’s own hotspot. Select 5 GHz in car settings if available."),
-                Triple(0, "Wi-Fi Direct", "Alternative setup · Requires the car’s Wi-Fi switch on. A 2.4 GHz link may stutter.")
+                Triple(1, getString(R.string.da_cs_hotspot_title), getString(R.string.da_cs_hotspot_hint)),
+                Triple(0, getString(R.string.da_cs_p2p_title), getString(R.string.da_cs_p2p_hint))
             )
             val wide = resources.configuration.screenWidthDp >= 850
             val choices = LinearLayout(requireContext()).apply {
@@ -78,55 +78,55 @@ class ConnectionSetupFragment : Fragment() {
                     if (index > 0) marginStart = dp(16)
                 } else LinearLayout.LayoutParams(-1, -2))
                 val selected = if (pendingCarHotspotSetup) mode == 1 else settings.wifiConnectionMode == 3 && settings.nativeApTransport == mode
-                button(option, if (selected) "✓  $title" else title, selected) {
+                button(option, if (selected) getString(R.string.da_cs_selected, title) else title, selected) {
                     if (mode == 1) { pendingCarHotspotSetup = true; render() } else selectMode(mode)
                 }
                 text(option, hint, 16)
             }
         }
         if (pendingCarHotspotSetup || (settings.wifiConnectionMode == 3 && settings.nativeApTransport == 1)) {
-            card(root, "2 · Set up the car hotspot") { box ->
-                text(box, "Turn on the hotspot in the car settings and select 5 GHz if available. Copy its name and password exactly. Leave the hotspot on when connecting. You do not need to join it manually on your phone; DiAuto sends the details over Bluetooth after you tap Connect phone.", 16)
+            card(root, getString(R.string.da_cs_step_hotspot)) { box ->
+                text(box, getString(R.string.da_cs_hotspot_instructions), 16)
                 text(box, when (com.andrerinas.openheadunit.utils.SoftApStateReader.read(requireContext())) {
-                    com.andrerinas.openheadunit.aap.SoftApState.ENABLED -> "Car hotspot is on · Check that 5 GHz is selected in car settings."
-                    com.andrerinas.openheadunit.aap.SoftApState.NOT_ENABLED -> "Car hotspot is off · Turn it on before connecting."
-                    else -> "Hotspot status unavailable · Check it in car settings."
+                    com.andrerinas.openheadunit.aap.SoftApState.ENABLED -> getString(R.string.da_cs_hotspot_on)
+                    com.andrerinas.openheadunit.aap.SoftApState.NOT_ENABLED -> getString(R.string.da_cs_hotspot_off)
+                    else -> getString(R.string.da_cs_hotspot_unknown)
                 }, 16)
-                button(box, "Open car hotspot settings") { openSystem(Intent("com.android.settings.WIFI_TETHER_SETTINGS")) }
-                button(box, if (pendingCarHotspotSetup) "Save hotspot details and use this mode" else "Edit saved hotspot · ${settings.hotspotSsid.ifEmpty { "Not set" }}") { editHotspot(pendingCarHotspotSetup) }
-                if (pendingCarHotspotSetup) text(box, "Finish setup · Save your hotspot details to use this mode.", 16)
+                button(box, getString(R.string.da_cs_open_hotspot_settings)) { openSystem(Intent("com.android.settings.WIFI_TETHER_SETTINGS")) }
+                button(box, if (pendingCarHotspotSetup) getString(R.string.da_cs_save_hotspot_and_use) else getString(R.string.da_cs_edit_hotspot, settings.hotspotSsid.ifEmpty { getString(R.string.da_cs_not_set) })) { editHotspot(pendingCarHotspotSetup) }
+                if (pendingCarHotspotSetup) text(box, getString(R.string.da_cs_finish_hotspot), 16)
                 val granted = AppPermissions.isWriteSettingsGranted(requireContext())
                 box.addView(androidx.appcompat.widget.SwitchCompat(requireContext()).apply {
-                    text = "Turn hotspot on automatically"
+                    text = getString(R.string.da_cs_auto_hotspot)
                     setTextColor(color(R.color.da_text))
                     minHeight = dp(60)
                     isChecked = settings.autoEnableHotspot
                     setOnCheckedChangeListener { _, checked -> settings.autoEnableHotspot = checked; render() }
                 })
-                text(box, "Optional. Requires Modify system settings access and compatible car firmware. If the hotspot stays off, turn it on in car settings.", 16)
-                if (!granted) button(box, "Allow automatic hotspot control") {
+                text(box, getString(R.string.da_cs_auto_hotspot_hint), 16)
+                if (!granted) button(box, getString(R.string.da_cs_allow_auto_hotspot)) {
                     openSystem(Intent(SystemSettings.ACTION_MANAGE_WRITE_SETTINGS, Uri.parse("package:${requireContext().packageName}")))
                 }
-                text(box, if (granted) "System settings access allowed" else "Automatic control needs permission", 15)
+                text(box, getString(if (granted) R.string.da_cs_write_settings_allowed else R.string.da_cs_write_settings_needed), 15)
             }
         } else if (settings.wifiConnectionMode != 3) {
-            card(root, "2 · Select a setup above") { box ->
-                text(box, "Your existing connection settings are saved. Choose one of the wireless options above to use this guided setup.", 16)
+            card(root, getString(R.string.da_cs_step_select_above)) { box ->
+                text(box, getString(R.string.da_cs_select_above_hint), 16)
             }
         } else {
-            card(root, "2 · Prepare the car") { box ->
-                text(box, "Turn the car’s Wi-Fi switch on. Allow Location / Nearby devices when requested and enable Location when Android asks. If playback stutters, try the built-in car hotspot at 5 GHz.", 16)
-                button(box, "Open car Wi-Fi settings") { openSystem(Intent(SystemSettings.ACTION_WIFI_SETTINGS)) }
+            card(root, getString(R.string.da_cs_step_prepare)) { box ->
+                text(box, getString(R.string.da_cs_prepare_hint), 16)
+                button(box, getString(R.string.da_cs_open_wifi)) { openSystem(Intent(SystemSettings.ACTION_WIFI_SETTINGS)) }
             }
         }
-        card(root, "3 · Pair and connect") { box ->
-            text(box, "Keep Bluetooth and Wi-Fi on your Android phone. Pair with the car’s Bluetooth. Return to DiAuto, tap Connect phone and select your phone. Accept the Android Auto prompts on the phone. A car internet plan is not required; mobile data depends on your phone’s network settings.", 16)
-            button(box, "Open Bluetooth settings") { openSystem(Intent(SystemSettings.ACTION_BLUETOOTH_SETTINGS)) }
-            button(box, "Review app permissions") { findNavController().navigate(R.id.permissionsFragment) }
-            button(box, "Done · Return to DiAuto") { requireActivity().finish() }.isEnabled = !pendingCarHotspotSetup
+        card(root, getString(R.string.da_cs_step_pair)) { box ->
+            text(box, getString(R.string.da_cs_pair_hint), 16)
+            button(box, getString(R.string.da_cs_open_bluetooth)) { openSystem(Intent(SystemSettings.ACTION_BLUETOOTH_SETTINGS)) }
+            button(box, getString(R.string.da_cs_review_permissions)) { findNavController().navigate(R.id.permissionsFragment) }
+            button(box, getString(R.string.da_cs_done)) { requireActivity().finish() }.isEnabled = !pendingCarHotspotSetup
         }
-        card(root, "Prefer a cable?") { box ->
-            text(box, "Use a USB data cable and the car’s USB data port. Unlock your phone and tap Connect with USB on DiAuto’s home screen. No hotspot setup is needed.", 16)
+        card(root, getString(R.string.da_cs_prefer_cable)) { box ->
+            text(box, getString(R.string.da_cs_cable_hint), 16)
         }
         scroll?.post { scroll.scrollTo(0, previousScroll) }
     }
@@ -143,10 +143,10 @@ class ConnectionSetupFragment : Fragment() {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(24), dp(12), dp(24), dp(12))
         }
-        text(fields, "Copy the name and password from the car’s hotspot settings. Saving here does not change the car’s hotspot.", 16)
-        val name = EditText(requireContext()).apply { hint = "Hotspot name"; setText(settings.hotspotSsid); setSingleLine() }
+        text(fields, getString(R.string.da_cs_hotspot_copy_hint), 16)
+        val name = EditText(requireContext()).apply { hint = getString(R.string.da_cs_hotspot_name); setText(settings.hotspotSsid); setSingleLine() }
         val secret = EditText(requireContext()).apply {
-            hint = "Hotspot password"; setText(settings.hotspotPassword); setSingleLine()
+            hint = getString(R.string.da_cs_hotspot_password); setText(settings.hotspotPassword); setSingleLine()
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         }
         name.imeOptions = android.view.inputmethod.EditorInfo.IME_ACTION_NEXT or android.view.inputmethod.EditorInfo.IME_FLAG_NO_EXTRACT_UI
@@ -165,17 +165,17 @@ class ConnectionSetupFragment : Fragment() {
         }
         fields.addView(name); fields.addView(secret)
         fields.addView(CheckBox(requireContext()).apply {
-            text = "Show password"
+            text = getString(R.string.da_cs_show_password)
             setOnCheckedChangeListener { _, checked ->
                 secret.transformationMethod = if (checked) null else android.text.method.PasswordTransformationMethod.getInstance()
                 secret.setSelection(secret.text.length)
             }
         })
         val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
-            .setTitle("Car hotspot details")
+            .setTitle(R.string.da_cs_hotspot_details)
             .setView(ScrollView(requireContext()).apply { addView(fields) })
-            .setPositiveButton("Save details", null).setNegativeButton(R.string.cancel) { _, _ -> hideKeyboard() }
-            .setNeutralButton("Hide keyboard", null).create()
+            .setPositiveButton(R.string.da_cs_save_details, null).setNegativeButton(R.string.cancel) { _, _ -> hideKeyboard() }
+            .setNeutralButton(R.string.da_cs_hide_keyboard, null).create()
         dialog.setOnShowListener {
             dialog.window?.setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
             dialog.getButton(android.app.AlertDialog.BUTTON_NEUTRAL).setOnClickListener { hideKeyboard() }
@@ -183,10 +183,10 @@ class ConnectionSetupFragment : Fragment() {
                 val ssid = name.text.toString().trim()
                 val password = secret.text.toString()
                 if (ssid.isEmpty() || '\u0000' in ssid || ssid.toByteArray(Charsets.UTF_8).size > 32) {
-                    name.error = "Enter the hotspot name (1–32 bytes)"; return@setOnClickListener
+                    name.error = getString(R.string.da_cs_ssid_error); return@setOnClickListener
                 }
                 if (password.length !in 8..63 || password.any { it.code !in 32..126 }) {
-                    secret.error = "Enter the hotspot password (8–63 ASCII characters)"; return@setOnClickListener
+                    secret.error = getString(R.string.da_cs_password_error); return@setOnClickListener
                 }
                 settings.hotspotSsid = ssid
                 settings.hotspotPassword = password
@@ -204,7 +204,7 @@ class ConnectionSetupFragment : Fragment() {
         }
         runCatching { startActivity(intent) }.onFailure {
             runCatching { startActivity(Intent(SystemSettings.ACTION_SETTINGS)) }.onFailure {
-                Toast.makeText(requireContext(), "Open the car settings from its home screen.", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), R.string.da_cs_open_car_settings, Toast.LENGTH_LONG).show()
             }
         }
     }

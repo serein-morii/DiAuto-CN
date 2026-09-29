@@ -454,7 +454,7 @@ class AutoStartFragment : Fragment() {
         val bondedDevices = adapter.bondedDevices.toList()
 
         if (bondedDevices.isEmpty()) {
-            Toast.makeText(requireContext(), "No paired Bluetooth devices found", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), R.string.no_paired_bluetooth_devices, Toast.LENGTH_LONG).show()
             return
         }
 

@@ -24,9 +24,9 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
-    <fragment android:id="@+id/diagnosticsFragment" android:name="com.andrerinas.openheadunit.main.DiagnosticsFragment" android:label="Diagnostics" />
+    <fragment android:id="@+id/diagnosticsFragment" android:name="com.andrerinas.openheadunit.main.DiagnosticsFragment" android:label="@string/da_diagnostics" />
 
-    <fragment android:id="@+id/connectionSetupFragment" android:name="com.andrerinas.openheadunit.main.ConnectionSetupFragment" android:label="Connection setup" />
+    <fragment android:id="@+id/connectionSetupFragment" android:name="com.andrerinas.openheadunit.main.ConnectionSetupFragment" android:label="@string/da_connection_setup" />
 
     <fragment android:id="@+id/driveSettingsFragment" android:name="com.andrerinas.openheadunit.main.DriveSettingsFragment" android:label="@string/settings" />
 
